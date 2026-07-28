@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QuestSafe — Sign in</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="layout">
+  <div class="brand-panel">
+    <p> LOGO HERE</p>
+  </div>
+
+
+  <div class="form-panel">
+
+    <div class="panel-header">
+      <div>
+        <h2 id="header-title">Welcome back</h2>
+        <p class="subtitle" id="header-subtitle">Choose how you're signing in</p>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button type="button" class="tab-btn active" data-tab="signin">Sign in</button>
+      <button type="button" class="tab-btn" data-tab="signup">Sign up</button>
+    </div>
+
+    <div class="role-toggle" id="role-toggle-signin">
+      <button type="button" class="role-btn active" data-role="kid">
+        <svg viewBox="0 0 24 24" fill="none"></svg>
+        I'm a kid
+      </button>
+      <button type="button" class="role-btn" data-role="parent">
+        <svg viewBox="0 0 24 24" fill="none"></svg>
+        I'm a parent
+      </button>
+    </div>
+
+    <!-- SIGN IN — KID -->
+    <form class="panel-form visible" id="panel-signin-kid" novalidate>
+      <div class="field">
+        <label for="si-kid-username">Username</label>
+        <input type="text" id="si-kid-username" placeholder="skyler_09" autocomplete="off" required />
+      </div>
+      <div class="field">
+        <label for="si-kid-code">Parent code</label>
+        <input type="text" id="si-kid-code" placeholder="4-digit code from your parent" inputmode="numeric" maxlength="4" required />
+      </div>
+      <button type="submit" class="primary-btn">Log in</button>
+    </form>
+
+    <!-- SIGN IN — PARENT -->
+    <form class="panel-form" id="panel-signin-parent" novalidate>
+      <div class="field">
+        <label for="si-parent-email">Email</label>
+        <input type="email" id="si-parent-email" placeholder="you@email.com" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="si-parent-password">Password</label>
+        <input type="password" id="si-parent-password" placeholder="••••••••" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="primary-btn">Log in</button>
+    </form>
+
+    <!-- SIGN UP — KID (no account creation) -->
+    <div class="panel-form" id="panel-signup-kid">
+      <div class="info-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <p>Kids don't create their own account here. Ask your parent to sign up first — they'll give you a code to sign in with.</p>
+      </div>
+    </div>
+
+    <!-- SIGN UP — PARENT -->
+    <form class="panel-form" id="panel-signup-parent" novalidate>
+      <p class="role-line" id="signup-label">Creating a <b>Parent</b> account first</p>
+      <div class="field">
+        <label for="su-parent-email">Email</label>
+        <input type="email" id="su-parent-email" placeholder="you@email.com" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="su-parent-password">Password</label>
+        <input type="password" id="su-parent-password" placeholder="••••••••" autocomplete="new-password" minlength="8" required />
+      </div>
+      <button type="submit" class="primary-btn">Create account</button>
+
+      <div class="info-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <p>After signup you'll get a 4-digit code to share with your kid so they can create their profile and link it to yours.</p>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
