@@ -26,27 +26,7 @@ profileButton.addEventListener('click', () => {
 
     profilePopup.classList.add('show');
 
-    currentProfile = "parent";
-
-    selectedAvatar = parentAvatar;
-
-    avatarTitle.textContent = "Select Parent Avatar";
-
-    parentProfileTab.classList.add("active");
-    childProfileTab.classList.remove("active");
-
-    // Highlight the parent's current avatar
-    avatarChoices.forEach(choice => {
-
-        choice.classList.remove("selected");
-
-        if (choice.src === selectedAvatar) {
-
-            choice.classList.add("selected");
-
-        }
-
-    });
+    switchToParent();
 
 });
 
@@ -58,27 +38,7 @@ childProfileButton.addEventListener('click', () => {
 
     profilePopup.classList.add('show');
 
-    currentProfile = "child";
-
-    selectedAvatar = childAvatar;
-
-    avatarTitle.textContent = "Select Child Avatar";
-
-    childProfileTab.classList.add("active");
-    parentProfileTab.classList.remove("active");
-
-    // Highlight the child's current avatar
-    avatarChoices.forEach(choice => {
-
-        choice.classList.remove("selected");
-
-        if (choice.src === selectedAvatar) {
-
-            choice.classList.add("selected");
-
-        }
-
-    });
+    switchToChild();
 
 });
 
@@ -162,45 +122,78 @@ document.getElementById("childProfileTab");
 const avatarTitle =
 document.getElementById("avatarTitle");
 
+// =======================================================
+// jp4235: Profile Switching Functions
+// =======================================================
 
+function switchToParent() {
 
-parentProfileTab.addEventListener("click",()=>{
+    currentProfile = "parent";
 
+    selectedAvatar = parentAvatar;
 
-    currentProfile="parent";
-
-    selectedAvatar=parentAvatar;
-
-
-    avatarTitle.textContent =
-    "Select Parent Avatar";
-
+    avatarTitle.textContent = "Select Parent Avatar";
 
     parentProfileTab.classList.add("active");
 
     childProfileTab.classList.remove("active");
 
+    // Highlight selected avatar
 
-});
+    avatarChoices.forEach(choice => {
 
+        choice.classList.remove("selected");
 
+        if (choice.src === selectedAvatar) {
 
-childProfileTab.addEventListener("click",()=>{
+            choice.classList.add("selected");
 
+        }
 
-    currentProfile="child";
+    });
 
-    selectedAvatar=childAvatar;
+}
 
+function switchToChild() {
 
-    avatarTitle.textContent =
-    "Select Child Avatar";
+    currentProfile = "child";
 
+    selectedAvatar = childAvatar;
+
+    avatarTitle.textContent = "Select Child Avatar";
 
     childProfileTab.classList.add("active");
 
     parentProfileTab.classList.remove("active");
 
+    // Highlight selected avatar
+
+    avatarChoices.forEach(choice => {
+
+        choice.classList.remove("selected");
+
+        if (choice.src === selectedAvatar) {
+
+            choice.classList.add("selected");
+
+        }
+
+    });
+
+}
+
+
+parentProfileTab.addEventListener("click", () => {
+
+    switchToParent();
+
+});
+
+
+
+childProfileTab.addEventListener("click", () => {
+
+    switchToChild();
 
 });
 
