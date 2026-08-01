@@ -15,11 +15,35 @@ const profilePopup = document.getElementById('profilePopup');
 
 const profileButton = document.getElementById('profileButton');
 
+// jp4235: Child profile button
+
+const childProfileButton =
+document.getElementById("childProfileButton");
+
 const closePopup = document.getElementById('closePopup');
 
 profileButton.addEventListener('click', () => {
 
     profilePopup.classList.add('show');
+
+});
+
+// =======================================================
+// jp4235: Open popup for Child
+// =======================================================
+
+childProfileButton.addEventListener('click', () => {
+
+    profilePopup.classList.add('show');
+
+    currentProfile = "child";
+
+    selectedAvatar = childAvatar;
+
+    avatarTitle.textContent = "Select Child Avatar";
+
+    childProfileTab.classList.add("active");
+    parentProfileTab.classList.remove("active");
 
 });
 
@@ -186,6 +210,13 @@ else{
 
 });
 
-// jp4235: Load saved avatar when page opens
+// =======================================================
+// jp4235: Load saved avatars when page opens
+// =======================================================
 
-profileAvatar.src = selectedAvatar;
+profileAvatar.src = parentAvatar;
+
+const childProfileAvatar =
+document.getElementById("childProfileAvatar");
+
+childProfileAvatar.src = childAvatar;
