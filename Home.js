@@ -28,3 +28,25 @@ closePopup.addEventListener('click', () => {
     profilePopup.classList.remove('show');
 
 });
+
+// =======================================================
+// jp4235: Avatar Selection
+// =======================================================
+
+const avatarChoices = document.querySelectorAll('.avatar-choice');
+
+avatarChoices.forEach(avatar => {
+
+    avatar.addEventListener('click', () => {
+
+        avatarChoices.forEach(choice => {
+
+            choice.classList.remove('selected');
+
+        });
+
+        avatar.classList.add('selected');
+
+    });
+
+});

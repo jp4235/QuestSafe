@@ -395,3 +395,51 @@ body.home-body {
   display: flex;
 
 }
+
+/* =======================================================
+        jp4235: AVATAR SELECTOR
+   ======================================================= */
+
+.avatar-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+    margin-bottom: 20px;
+
+}
+
+.avatar-choice {
+
+    width: 90px;
+
+    height: 90px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    cursor: pointer;
+
+    border: 3px solid transparent;
+
+    transition: .2s;
+
+}
+
+.avatar-choice:hover {
+
+    transform: scale(1.05);
+
+}
+
+.avatar-choice.selected {
+
+    border: 3px solid var(--green-600);
+
+}
