@@ -319,6 +319,44 @@ body.home-body {
   cursor: pointer;
 }
 
+/* =======================================================
+   jp4235: Header Avatar Labels
+======================================================= */
+
+.avatar-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+
+}
+
+.avatar img {
+
+    width: 100%;
+
+    height: 100%;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+}
+
+.avatar-label {
+
+    font-size: 11px;
+
+    color: var(--text-secondary);
+
+    font-weight: 500;
+
+}
+
 /* jp4235: Make avatar images fit inside the circle */
 .avatar img {
     width: 100%;
