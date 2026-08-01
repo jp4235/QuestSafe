@@ -326,3 +326,72 @@ body.home-body {
     object-fit: cover;
     border-radius: 50%;
 }
+
+/* =======================================================
+   PROFILE POPUP
+   ======================================================= */
+
+.popup-overlay {
+
+  display: none;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0,0,0,.60);
+
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+
+}
+
+.popup-content {
+
+  width: 420px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-lg);
+
+  padding: 20px;
+
+}
+
+.popup-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+.close-button {
+
+  background: transparent;
+
+  border: none;
+
+  color: white;
+
+  font-size: 22px;
+
+  cursor: pointer;
+
+}
+
+.popup-overlay.show {
+
+  display: flex;
+
+}
