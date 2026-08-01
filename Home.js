@@ -26,6 +26,28 @@ profileButton.addEventListener('click', () => {
 
     profilePopup.classList.add('show');
 
+    currentProfile = "parent";
+
+    selectedAvatar = parentAvatar;
+
+    avatarTitle.textContent = "Select Parent Avatar";
+
+    parentProfileTab.classList.add("active");
+    childProfileTab.classList.remove("active");
+
+    // Highlight the parent's current avatar
+    avatarChoices.forEach(choice => {
+
+        choice.classList.remove("selected");
+
+        if (choice.src === selectedAvatar) {
+
+            choice.classList.add("selected");
+
+        }
+
+    });
+
 });
 
 // =======================================================
@@ -44,6 +66,19 @@ childProfileButton.addEventListener('click', () => {
 
     childProfileTab.classList.add("active");
     parentProfileTab.classList.remove("active");
+
+    // Highlight the child's current avatar
+    avatarChoices.forEach(choice => {
+
+        choice.classList.remove("selected");
+
+        if (choice.src === selectedAvatar) {
+
+            choice.classList.add("selected");
+
+        }
+
+    });
 
 });
 
@@ -183,7 +218,7 @@ if(currentProfile === "parent"){
 
     localStorage.setItem(
         "parentAvatar",
-        selectedAvatar
+        parentAvatar
     );
 
 }
@@ -193,19 +228,27 @@ else{
 
     localStorage.setItem(
         "childAvatar",
-        selectedAvatar
+        childAvatar
     );
 
 }
 
-    // Change header avatar
+    // Update the correct header avatar
 
-    profileAvatar.src = selectedAvatar;
+    if(currentProfile === "parent"){
 
+        profileAvatar.src = parentAvatar;
 
-    // Close popup
+    }
+    else{
 
-    profilePopup.classList.remove('show');
+        childProfileAvatar.src = childAvatar;
+
+    }
+
+// Close popup
+
+profilePopup.classList.remove('show');
 
 
 });
