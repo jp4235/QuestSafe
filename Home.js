@@ -39,8 +39,9 @@ const profileAvatar = document.getElementById('profileAvatar');
 
 const saveAvatarButton = document.getElementById('saveAvatar');
 
-let selectedAvatar = "avatars/avatar1.png";
-
+// jp4235: Load saved avatar if one exists
+let selectedAvatar = localStorage.getItem("parentAvatar") 
+    || "avatars/avatar1.png";
 
 // Select avatar
 avatarChoices.forEach(avatar => {
@@ -77,6 +78,14 @@ avatarChoices.forEach(avatar => {
 saveAvatarButton.addEventListener('click', () => {
 
 
+    // jp4235: Save avatar choice in browser storage
+
+    localStorage.setItem(
+        "parentAvatar",
+        selectedAvatar
+    );
+
+
     // Change header avatar
 
     profileAvatar.src = selectedAvatar;
@@ -88,3 +97,7 @@ saveAvatarButton.addEventListener('click', () => {
 
 
 });
+
+// jp4235: Load saved avatar when page opens
+
+profileAvatar.src = selectedAvatar;
