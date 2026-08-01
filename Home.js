@@ -30,14 +30,25 @@ closePopup.addEventListener('click', () => {
 });
 
 // =======================================================
-// jp4235: Avatar Selection
+// jp4235: Avatar Selection + Saving
 // =======================================================
 
 const avatarChoices = document.querySelectorAll('.avatar-choice');
 
+const profileAvatar = document.getElementById('profileAvatar');
+
+const saveAvatarButton = document.getElementById('saveAvatar');
+
+let selectedAvatar = "avatars/avatar1.png";
+
+
+// Select avatar
 avatarChoices.forEach(avatar => {
 
     avatar.addEventListener('click', () => {
+
+
+        // Remove previous selection
 
         avatarChoices.forEach(choice => {
 
@@ -45,8 +56,35 @@ avatarChoices.forEach(avatar => {
 
         });
 
+
+        // Highlight chosen avatar
+
         avatar.classList.add('selected');
 
+
+        // Store chosen image path
+
+        selectedAvatar = avatar.src;
+
+
     });
+
+});
+
+
+// Save avatar
+
+saveAvatarButton.addEventListener('click', () => {
+
+
+    // Change header avatar
+
+    profileAvatar.src = selectedAvatar;
+
+
+    // Close popup
+
+    profilePopup.classList.remove('show');
+
 
 });
