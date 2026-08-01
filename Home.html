@@ -48,30 +48,53 @@
     <hr>
 
     <p>
-      <!-- =======================================
-              jp4235: Avatar Selection
-      ======================================= -->
+<!-- =======================================
+     jp4235: Profile Selection
+======================================= -->
 
-      <h3>Select an Avatar</h3>
 
-      <div class="avatar-grid">
+<div class="profile-tabs">
 
-         <img src="avatars/avatar1.png" class="avatar-choice selected" alt="Avatar 1">
+          <button 
+              id="parentProfileTab" 
+              class="profile-tab active">
+              Parent
+          </button>
 
-         <img src="avatars/avatar2.png" class="avatar-choice" alt="Avatar 2">
 
-         <img src="avatars/avatar3.png" class="avatar-choice" alt="Avatar 3">
-
-         <img src="avatars/avatar4.png" class="avatar-choice" alt="Avatar 4">
-
-         <img src="avatars/avatar5.png" class="avatar-choice" alt="Avatar 5">
-
-         <img src="avatars/avatar6.png" class="avatar-choice" alt="Avatar 6">
+          <button 
+              id="childProfileTab" 
+              class="profile-tab">
+              Child
+          </button>
 
       </div>
 
+
+      <h3 id="avatarTitle">
+          Select Parent Avatar
+      </h3>
+
+
+      <div class="avatar-grid">
+
+        <img src="avatars/avatar1.png" class="avatar-choice selected">
+
+         <img src="avatars/avatar2.png" class="avatar-choice">
+
+         <img src="avatars/avatar3.png" class="avatar-choice">
+
+         <img src="avatars/avatar4.png" class="avatar-choice">
+
+         <img src="avatars/avatar5.png" class="avatar-choice">
+
+         <img src="avatars/avatar6.png" class="avatar-choice">
+
+      </div>
+
+
       <button id="saveAvatar" class="primary-btn">
-        Save Avatar
+          Save Avatar
       </button>
     </p>
 

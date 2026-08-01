@@ -443,3 +443,44 @@ body.home-body {
     border: 3px solid var(--green-600);
 
 }
+
+/* =======================================================
+   PROFILE TABS
+   ======================================================= */
+
+
+.profile-tabs {
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+
+.profile-tab {
+
+    flex:1;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    border:1px solid var(--border);
+
+    background:var(--panel-2);
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+
+.profile-tab.active {
+
+    background:var(--green-600);
+
+}

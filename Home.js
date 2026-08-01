@@ -39,9 +39,24 @@ const profileAvatar = document.getElementById('profileAvatar');
 
 const saveAvatarButton = document.getElementById('saveAvatar');
 
-// jp4235: Load saved avatar if one exists
-let selectedAvatar = localStorage.getItem("parentAvatar") 
+// jp4235: Store separate avatars
+
+let currentProfile = "parent";
+
+
+let selectedAvatar = 
+    localStorage.getItem("parentAvatar")
     || "avatars/avatar1.png";
+
+
+let parentAvatar =
+    localStorage.getItem("parentAvatar")
+    || "avatars/avatar1.png";
+
+
+let childAvatar =
+    localStorage.getItem("childAvatar")
+    || "avatars/avatar2.png";
 
 // Select avatar
 avatarChoices.forEach(avatar => {
@@ -72,6 +87,64 @@ avatarChoices.forEach(avatar => {
 
 });
 
+// =======================================================
+// NEW: Switch Parent / Child Profiles
+// =======================================================
+
+
+const parentProfileTab =
+document.getElementById("parentProfileTab");
+
+
+const childProfileTab =
+document.getElementById("childProfileTab");
+
+
+const avatarTitle =
+document.getElementById("avatarTitle");
+
+
+
+parentProfileTab.addEventListener("click",()=>{
+
+
+    currentProfile="parent";
+
+    selectedAvatar=parentAvatar;
+
+
+    avatarTitle.textContent =
+    "Select Parent Avatar";
+
+
+    parentProfileTab.classList.add("active");
+
+    childProfileTab.classList.remove("active");
+
+
+});
+
+
+
+childProfileTab.addEventListener("click",()=>{
+
+
+    currentProfile="child";
+
+    selectedAvatar=childAvatar;
+
+
+    avatarTitle.textContent =
+    "Select Child Avatar";
+
+
+    childProfileTab.classList.add("active");
+
+    parentProfileTab.classList.remove("active");
+
+
+});
+
 
 // Save avatar
 
@@ -80,11 +153,26 @@ saveAvatarButton.addEventListener('click', () => {
 
     // jp4235: Save avatar choice in browser storage
 
+if(currentProfile === "parent"){
+
+    parentAvatar = selectedAvatar;
+
     localStorage.setItem(
         "parentAvatar",
         selectedAvatar
     );
 
+}
+else{
+
+    childAvatar = selectedAvatar;
+
+    localStorage.setItem(
+        "childAvatar",
+        selectedAvatar
+    );
+
+}
 
     // Change header avatar
 
