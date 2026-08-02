@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QuestSafe</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body class="home-body">
+
+<div class="header">
+  <div class="header-actions">
+    <button class="icon-button" id="reportButton" title="Report">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V4s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V4"/></svg>
+      <span>Report</span>
+    </button>
+
+    <button class="icon-button" id="blockButton" title="Block">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
+      <span>Block</span>
+    </button>
+
+      <!-- jp4235: Parent profile avatar -->
+      <div class="avatar-group">
+
+          <div class="avatar" id="profileButton">
+             <img
+                id="profileAvatar"
+                src="avatars/avatar1.png"
+                alt="Parent Avatar">
+        </div>
+
+        <span class="avatar-label">Parent</span>
+
+    </div>
+
+
+    <!-- jp4235: Child profile avatar -->
+    <div class="avatar-group">
+
+        <div class="avatar" id="childProfileButton">
+             <img
+                id="childProfileAvatar"
+                src="avatars/avatar2.png"
+                alt="Child Avatar">
+        </div>
+
+        <span class="avatar-label">Child</span>
+
+    </div>
+  </div>
+</div>
+
+<!-- DOWN HERE WILL BE THE MAIN PAGE WHICH IS COMMUNITIES/FRIENDS ETC-->
+<div class="communities-section">
+  <div class="section-header">
+    <h2>Communities</h2>
+  </div>
+
+  <div class="community-list">
+    <!-- Minecraft -->
+    <div class="community-card">
+      <div class="community-avatar" style="background: #d4e0f0;">⛏</div>
+      <div class="community-info">
+        <h3>Minecraft</h3>
+        <div class="meta">
+          <span class="member-count">👥 246 Members</span>
+          <span>💬 8 new messages</span>
+          <span class="status">Online</span>                
+        </div>
+      </div>
+      <div class="community-action">
+        <button class="message-btn">Message</button>
+        <button class="more-btn">...</button>
+      </div>
+    </div>
+
+    <!-- Roblox -->
+    <div class="community-card">
+      <div class="community-avatar" style="background: #d4e0f0;">🎮</div>
+      <div class="community-info">
+        <h3>Roblox</h3>
+        <div class="meta">
+          <span class="member-count">👥 455 Members</span>
+          <span>💬 3 new messages</span>
+          <span class="status">Online</span>                
+        </div>
+      </div>
+      <div class="community-action">
+        <button class="message-btn">Message</button>
+        <button class="more-btn">...</button>
+      </div>
+    </div>
+
+    <!-- Pokemon -->
+    <div class="community-card">
+      <div class="community-avatar" style="background: #d4e0f0;">⚡</div>
+      <div class="community-info">
+        <h3>Pokemon</h3>
+        <div class="meta">
+          <span class="member-count">👥 355 Members</span>
+          <span>💬 15 new messages</span>
+          <span class="status offline">Offline</span>                
+        </div>
+      </div>
+      <div class="community-action">
+        <button class="message-btn">Message</button>
+        <button class="more-btn">...</button>
+      </div>
+    </div>
+
+    <!-- Valorant -->
+    <div class="community-card">
+      <div class="community-avatar" style="background: #d4e0f0;">🔫</div>
+      <div class="community-info">
+        <h3>Valorant</h3>
+        <div class="meta">
+          <span class="member-count">👥 666 Members</span>
+          <span>💬 18 new messages</span>
+          <span class="status">Online</span>                
+        </div>
+      </div>
+      <div class="community-action">
+        <button class="message-btn">Message</button>
+        <button class="more-btn">...</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-text">
+    <span>Join a new gaming community!</span>
+    <button class="join-btn">+ Add new</button>
+  </div>
+</div>
+
+<!-- jp4235: Parent Profile Popup -->
+<div id="profilePopup" class="popup-overlay">
+
+  <div class="popup-content">
+
+    <div class="popup-header">
+      <h2>Parent Profile</h2>
+
+      <button id="closePopup" class="close-button">
+        ✕
+      </button>
+    </div>
+
+    <hr>
+
+    <p>
+<!-- =======================================
+     jp4235: Profile Selection
+======================================= -->
+
+
+<div class="profile-tabs">
+
+          <button 
+              id="parentProfileTab" 
+              class="profile-tab active">
+              Parent
+          </button>
+
+
+          <button 
+              id="childProfileTab" 
+              class="profile-tab">
+              Child
+          </button>
+
+      </div>
+
+
+      <h3 id="avatarTitle">
+          Select Parent Avatar
+      </h3>
+
+
+      <div class="avatar-grid">
+
+        <img src="avatars/avatar1.png" class="avatar-choice selected">
+
+         <img src="avatars/avatar2.png" class="avatar-choice">
+
+         <img src="avatars/avatar3.png" class="avatar-choice">
+
+         <img src="avatars/avatar4.png" class="avatar-choice">
+
+         <img src="avatars/avatar5.png" class="avatar-choice">
+
+         <img src="avatars/avatar6.png" class="avatar-choice">
+
+      </div>
+
+
+      <button id="saveAvatar" class="primary-btn">
+          Save Avatar
+      </button>
+    </p>
+
+  </div>
+
+</div>
+
+<script src="home.js"></script>
+</body>
+</html>
