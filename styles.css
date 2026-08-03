@@ -611,9 +611,6 @@ body.home-body {
   border-color: rgba(0,255,136,0.2);
   transform: translateY(-4px);
   box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 60px rgba(0,255,136,0.03);
-
-
-
 }
 .community-card:hover .community-avatar {
   background: rgba(0, 255, 136, 0.15) !important;
@@ -740,4 +737,86 @@ body.home-body {
 .divider-text .join-btn:hover {
   opacity: 1;
   background: rgba(0, 255, 136, 0.08);
+}
+
+/* =======================================================
+        Report User Popup
+   ======================================================= */
+
+.report-info {
+  background: var(--panel-2);
+  border-radius: var(--radius);
+  padding: 14px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin: 14px 0;
+}
+
+.reason-select {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--panel-2);
+  border: 1px solid var(--green-600);
+  border-radius: 24px;
+  padding: 8px 16px;
+  margin: 0 auto 14px;
+  width: fit-content;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.reason-icon {
+  background: var(--green-600);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.block-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.report-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.report-actions button {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--panel);
+}
+
+.cancel-btn {
+  border: 1px solid var(--danger);
+  color: var(--text-primary);
+}
+
+.report-btn {
+  border: 1px solid var(--green-600);
+  color: var(--text-primary);
+}
+
+.report-actions .full-width {
+  flex: 1;
+  width: 100%;
 }

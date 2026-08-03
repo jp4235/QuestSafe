@@ -50,7 +50,61 @@
     </div>
   </div>
 </div>
+<!-- jp4235: Report User Popup -->
+<!-- jp4235: Report User Popup -->
+<div id="reportPopup" class="popup-overlay">
 
+  <div class="popup-content">
+
+    <div class="popup-header">
+      <h2>Report a User</h2>
+      <button id="closeReportPopup" class="close-button">✕</button>
+    </div>
+
+    <hr>
+
+    <!-- Form view: shown first -->
+    <div id="reportFormView">
+
+      <div class="report-info">
+        Would you like a moderator to review <strong id="reportedUsername">&lt;username&gt;</strong>?
+        Please choose a reason and click Report. The moderator can also decide if you are abusing this feature!
+        Remember, you can also choose to ignore this user.
+      </div>
+
+      <div class="reason-select" id="reasonSelect">
+        <span class="reason-icon">+</span>
+        <span id="reasonLabel">Inappropriate Language!</span>
+      </div>
+
+      <div class="block-row">
+        <input type="checkbox" id="blockUserCheckbox">
+        <label for="blockUserCheckbox">Block User</label>
+      </div>
+
+      <div class="report-actions">
+        <button id="cancelReport" class="cancel-btn">CANCEL ✕</button>
+        <button id="submitReport" class="report-btn">REPORT ✓</button>
+      </div>
+
+    </div>
+
+    <!-- Success view: hidden until Report is clicked -->
+    <div id="reportSuccessView" class="hidden">
+
+      <div class="report-info">
+        You have successfully reported <strong id="reportedUsernameConfirm">&lt;username&gt;</strong>.
+      </div>
+
+      <div class="report-actions">
+        <button id="closeSuccessBtn" class="report-btn full-width">CLOSE ✓</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 <!-- DOWN HERE WILL BE THE MAIN PAGE WHICH IS COMMUNITIES/FRIENDS ETC-->
 
 <!-- jp4235: Parent Profile Popup -->

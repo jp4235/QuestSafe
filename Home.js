@@ -49,6 +49,58 @@ closePopup.addEventListener('click', () => {
 });
 
 // =======================================================
+// sr3745: Report Popup
+// =======================================================
+
+const reportPopup = document.getElementById('reportPopup');
+const reportButton = document.getElementById('reportButton');
+const closeReportPopup = document.getElementById('closeReportPopup');
+const cancelReport = document.getElementById('cancelReport');
+const submitReport = document.getElementById('submitReport');
+
+reportButton.addEventListener('click', () => {
+    reportPopup.classList.add('show');
+});
+
+closeReportPopup.addEventListener('click', () => {
+    reportPopup.classList.remove('show');
+});
+
+cancelReport.addEventListener('click', () => {
+    reportPopup.classList.remove('show');
+});
+
+// Cycle through reasons on click — swap for a real dropdown later
+const reasons = ['Inappropriate Language!', 'Harassment', 'Spam', 'Impersonation'];
+let reasonIndex = 0;
+document.getElementById('reasonSelect').addEventListener('click', () => {
+    reasonIndex = (reasonIndex + 1) % reasons.length;
+    document.getElementById('reasonLabel').textContent = reasons[reasonIndex];
+});
+
+submitReport.addEventListener('click', () => {
+    const reason = document.getElementById('reasonLabel').textContent;
+    const blocked = document.getElementById('blockUserCheckbox').checked;
+
+    console.log('Report submitted:', { reason, blocked });
+    // TODO: send this to your backend, e.g.:
+    // fetch('/api/report', { method: 'POST', body: JSON.stringify({ reason, blocked }) })
+
+    // Show the success view instead of closing right away
+    document.getElementById('reportFormView').classList.add('hidden');
+    document.getElementById('reportSuccessView').classList.remove('hidden');
+});
+
+// Close after seeing the success message
+document.getElementById('closeSuccessBtn').addEventListener('click', () => {
+    reportPopup.classList.remove('show');
+
+    // Reset back to the form view for next time the popup opens
+    document.getElementById('reportSuccessView').classList.add('hidden');
+    document.getElementById('reportFormView').classList.remove('hidden');gi
+});
+
+// =======================================================
 // jp4235: Avatar Selection + Saving
 // =======================================================
 
