@@ -50,62 +50,88 @@
     </div>
   </div>
 </div>
-<!-- jp4235: Report User Popup -->
-<!-- jp4235: Report User Popup -->
-<div id="reportPopup" class="popup-overlay">
 
-  <div class="popup-content">
-
-    <div class="popup-header">
-      <h2>Report a User</h2>
-      <button id="closeReportPopup" class="close-button">✕</button>
-    </div>
-
-    <hr>
-
-    <!-- Form view: shown first -->
-    <div id="reportFormView">
-
-      <div class="report-info">
-        Would you like a moderator to review <strong id="reportedUsername">&lt;username&gt;</strong>?
-        Please choose a reason and click Report. The moderator can also decide if you are abusing this feature!
-        Remember, you can also choose to ignore this user.
-      </div>
-
-      <div class="reason-select" id="reasonSelect">
-        <span class="reason-icon">+</span>
-        <span id="reasonLabel">Inappropriate Language!</span>
-      </div>
-
-      <div class="block-row">
-        <input type="checkbox" id="blockUserCheckbox">
-        <label for="blockUserCheckbox">Block User</label>
-      </div>
-
-      <div class="report-actions">
-        <button id="cancelReport" class="cancel-btn">CANCEL ✕</button>
-        <button id="submitReport" class="report-btn">REPORT ✓</button>
-      </div>
-
-    </div>
-
-    <!-- Success view: hidden until Report is clicked -->
-    <div id="reportSuccessView" class="hidden">
-
-      <div class="report-info">
-        You have successfully reported <strong id="reportedUsernameConfirm">&lt;username&gt;</strong>.
-      </div>
-
-      <div class="report-actions">
-        <button id="closeSuccessBtn" class="report-btn full-width">CLOSE ✓</button>
-      </div>
-
-    </div>
-
+<!-- DOWN HERE WILL BE THE MAIN PAGE WHICH IS COMMUNITIES/FRIENDS ETC-->
+<div class="communities-section">
+  <div class="section-header">
+    <h2>Communities</h2>
   </div>
 
+  <div class="community-list">
+    <!-- Minecraft -->
+    <div class="community-card">
+      <div class="community-avatar" style="background: #d4e0f0;">⛏</div>
+      <div class="community-info">
+        <h3>Minecraft</h3>
+        <div class="meta">
+          <span class="member-count">👥 246 Members</span>
+          <span>💬 8 new messages</span>
+          <span class="status">Online</span>                
+        </div>
+      </div>
+      <div class="community-action">
+        <button class="message-btn">Message</button>
+        <button class="more-btn">...</button>
+      </div>
+    </div>
+
+    <!-- Roblox -->
+    <div class="community-card">
+      <div class="community-avatar" style="background: #d4e0f0;">🎮</div>
+      <div class="community-info">
+        <h3>Roblox</h3>
+        <div class="meta">
+          <span class="member-count">👥 455 Members</span>
+          <span>💬 3 new messages</span>
+          <span class="status">Online</span>                
+        </div>
+      </div>
+      <div class="community-action">
+        <button class="message-btn">Message</button>
+        <button class="more-btn">...</button>
+      </div>
+    </div>
+
+    <!-- Pokemon -->
+    <div class="community-card">
+      <div class="community-avatar" style="background: #d4e0f0;">⚡</div>
+      <div class="community-info">
+        <h3>Pokemon</h3>
+        <div class="meta">
+          <span class="member-count">👥 355 Members</span>
+          <span>💬 15 new messages</span>
+          <span class="status offline">Offline</span>                
+        </div>
+      </div>
+      <div class="community-action">
+        <button class="message-btn">Message</button>
+        <button class="more-btn">...</button>
+      </div>
+    </div>
+
+    <!-- Valorant -->
+    <div class="community-card">
+      <div class="community-avatar" style="background: #d4e0f0;">🔫</div>
+      <div class="community-info">
+        <h3>Valorant</h3>
+        <div class="meta">
+          <span class="member-count">👥 666 Members</span>
+          <span>💬 18 new messages</span>
+          <span class="status">Online</span>                
+        </div>
+      </div>
+      <div class="community-action">
+        <button class="message-btn">Message</button>
+        <button class="more-btn">...</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-text">
+    <span>Join a new gaming community!</span>
+    <button class="join-btn">+ Add new</button>
+  </div>
 </div>
-<!-- DOWN HERE WILL BE THE MAIN PAGE WHICH IS COMMUNITIES/FRIENDS ETC-->
 
 <!-- jp4235: Parent Profile Popup -->
 <div id="profilePopup" class="popup-overlay">
