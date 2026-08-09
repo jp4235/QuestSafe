@@ -1,3 +1,4 @@
+// zzs25: Kid/Parent selection disappears.Parent is automatically selected. The parent sign-up form is displayed.
 const tabButtons = document.querySelectorAll('.tab-btn');
 const roleButtons = document.querySelectorAll('.role-btn');
 const roleToggleSignin = document.getElementById('role-toggle-signin');
@@ -11,6 +12,7 @@ function render() {
   tabButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === currentTab));
   roleButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.role === currentRole));
 
+  // Sign up is parent-only, so hide the kid/parent toggle there and force parent
   if (currentTab === 'signup') {
     roleToggleSignin.classList.add('hidden');
     currentRole = 'parent';
@@ -46,6 +48,7 @@ roleButtons.forEach(btn => {
   });
 });
 
+// --- Simple front-end validation stubs (wire these to your backend calls) ---
 
 function showError(fieldEl, message) {
   clearError(fieldEl);
@@ -74,8 +77,9 @@ document.getElementById('panel-signin-kid').addEventListener('submit', (e) => {
   if (!/^\d{4}$/.test(code.value.trim())) { showError(code, 'Enter the 4-digit code from your parent.'); valid = false; }
   if (!valid) return;
 
+  
   console.log('Kid sign in:', { username: username.value, code: code.value });
-  window.location.href = 'home.html';
+  window.location.href = 'Communities.html';
 });
 
 document.getElementById('panel-signin-parent').addEventListener('submit', (e) => {
@@ -91,7 +95,7 @@ document.getElementById('panel-signin-parent').addEventListener('submit', (e) =>
   if (!valid) return;
 
   console.log('Parent sign in:', { email: email.value });
-  window.location.href = 'home.html';
+  window.location.href = 'Home.html';
 });
 
 document.getElementById('panel-signup-parent').addEventListener('submit', (e) => {
@@ -107,7 +111,7 @@ document.getElementById('panel-signup-parent').addEventListener('submit', (e) =>
   if (!valid) return;
 
   console.log('Parent sign up:', { email: email.value });
-  window.location.href = 'home.html';
+  window.location.href = 'Home.html';
 });
 
 render();

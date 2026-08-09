@@ -83,10 +83,7 @@ submitReport.addEventListener('click', () => {
     const blocked = document.getElementById('blockUserCheckbox').checked;
 
     console.log('Report submitted:', { reason, blocked });
-    // TODO: send this to your backend, e.g.:
-    // fetch('/api/report', { method: 'POST', body: JSON.stringify({ reason, blocked }) })
-
-    // Show the success view instead of closing right away
+  
     document.getElementById('reportFormView').classList.add('hidden');
     document.getElementById('reportSuccessView').classList.remove('hidden');
 });
@@ -97,7 +94,7 @@ document.getElementById('closeSuccessBtn').addEventListener('click', () => {
 
     // Reset back to the form view for next time the popup opens
     document.getElementById('reportSuccessView').classList.add('hidden');
-    document.getElementById('reportFormView').classList.remove('hidden');gi
+    document.getElementById('reportFormView').classList.remove('hidden');
 });
 
 // =======================================================

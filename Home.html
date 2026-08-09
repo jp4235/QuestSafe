@@ -107,6 +107,45 @@
 </div>
 <!-- DOWN HERE WILL BE THE MAIN PAGE WHICH IS COMMUNITIES/FRIENDS ETC-->
 
+<!-- jp4235: Parent overview section -->
+<div class="overview-section">
+  <div class="section-header">
+    <h2>Welcome to QuestSafe</h2>
+  </div>
+
+  <p class="overview-intro">
+    QuestSafe helps your kid connect with other young gamers in communities like Minecraft, Roblox, and
+    Pok&eacute;mon &mdash; while giving you visibility and control over how they do it.
+  </p>
+
+  <div class="overview-cards">
+    <div class="overview-card">
+      <div class="overview-icon">&#128737;&#65039;</div>
+      <h3>Moderated communities</h3>
+      <p>Every community your kid joins is monitored, and anyone can be reported or blocked in one tap.</p>
+    </div>
+
+    <div class="overview-card">
+      <div class="overview-icon">&#128279;</div>
+      <h3>Linked accounts</h3>
+      <p>Your kid's account is linked to yours with a 4-digit parent code, so you always know who's connected to who.</p>
+    </div>
+
+    <div class="overview-card">
+      <div class="overview-icon">&#128681;</div>
+      <h3>Reports go to you</h3>
+      <p>If your kid reports or blocks someone, you'll be able to see it here from your parent dashboard.</p>
+    </div>
+
+    <div class="overview-card">
+      <div class="overview-icon">&#127918;</div>
+      <h3>Kid-safe sign in</h3>
+      <p>Your kid signs in with just a username and your code &mdash; no email, no password to manage.</p>
+    </div>
+  </div>
+</div>
+
+
 <!-- jp4235: Parent Profile Popup -->
 <div id="profilePopup" class="popup-overlay">
 
@@ -177,6 +216,314 @@
 
 </div>
 
-<script src="home.js"></script>
+<script>
+// This page currently only has the top banner (Report, Block, Profile).
+
+
+document.getElementById('reportButton').addEventListener('click', () => {
+});
+
+document.getElementById('blockButton').addEventListener('click', () => {
+});
+
+// =======================================================
+// jp4235: Profile Popup
+// =======================================================
+
+const profilePopup = document.getElementById('profilePopup');
+
+const profileButton = document.getElementById('profileButton');
+
+// jp4235: Child profile button
+
+const childProfileButton =
+document.getElementById("childProfileButton");
+
+const closePopup = document.getElementById('closePopup');
+
+profileButton.addEventListener('click', () => {
+
+    profilePopup.classList.add('show');
+
+    switchToParent();
+
+});
+
+// =======================================================
+// jp4235: Open popup for Child
+// =======================================================
+
+childProfileButton.addEventListener('click', () => {
+
+    profilePopup.classList.add('show');
+
+    switchToChild();
+
+});
+
+closePopup.addEventListener('click', () => {
+
+    profilePopup.classList.remove('show');
+
+});
+
+// =======================================================
+// sr3745: Report Popup
+// =======================================================
+
+const reportPopup = document.getElementById('reportPopup');
+const reportButton = document.getElementById('reportButton');
+const closeReportPopup = document.getElementById('closeReportPopup');
+const cancelReport = document.getElementById('cancelReport');
+const submitReport = document.getElementById('submitReport');
+
+reportButton.addEventListener('click', () => {
+    reportPopup.classList.add('show');
+});
+
+closeReportPopup.addEventListener('click', () => {
+    reportPopup.classList.remove('show');
+});
+
+cancelReport.addEventListener('click', () => {
+    reportPopup.classList.remove('show');
+});
+
+// Cycle through reasons on click — swap for a real dropdown later
+const reasons = ['Inappropriate Language!', 'Harassment', 'Spam', 'Impersonation'];
+let reasonIndex = 0;
+document.getElementById('reasonSelect').addEventListener('click', () => {
+    reasonIndex = (reasonIndex + 1) % reasons.length;
+    document.getElementById('reasonLabel').textContent = reasons[reasonIndex];
+});
+
+submitReport.addEventListener('click', () => {
+    const reason = document.getElementById('reasonLabel').textContent;
+    const blocked = document.getElementById('blockUserCheckbox').checked;
+
+    console.log('Report submitted:', { reason, blocked });
+  
+    document.getElementById('reportFormView').classList.add('hidden');
+    document.getElementById('reportSuccessView').classList.remove('hidden');
+});
+
+// Close after seeing the success message
+document.getElementById('closeSuccessBtn').addEventListener('click', () => {
+    reportPopup.classList.remove('show');
+
+    // Reset back to the form view for next time the popup opens
+    document.getElementById('reportSuccessView').classList.add('hidden');
+    document.getElementById('reportFormView').classList.remove('hidden');
+});
+
+// =======================================================
+// zzs25: Avatar Selection + Saving
+// =======================================================
+
+const avatarChoices = document.querySelectorAll('.avatar-choice');
+
+const profileAvatar = document.getElementById('profileAvatar');
+
+const saveAvatarButton = document.getElementById('saveAvatar');
+
+// zzs25:: Store separate avatars
+
+let currentProfile = "parent";
+
+
+let selectedAvatar = 
+    localStorage.getItem("parentAvatar")
+    || "avatars/avatar1.png";
+
+
+let parentAvatar =
+    localStorage.getItem("parentAvatar")
+    || "avatars/avatar1.png";
+
+
+let childAvatar =
+    localStorage.getItem("childAvatar")
+    || "avatars/avatar2.png";
+
+// Select avatar
+avatarChoices.forEach(avatar => {
+
+    avatar.addEventListener('click', () => {
+
+
+        // Remove previous selection
+
+        avatarChoices.forEach(choice => {
+
+            choice.classList.remove('selected');
+
+        });
+
+
+        // Highlight chosen avatar
+
+        avatar.classList.add('selected');
+
+
+        // Store chosen image path
+
+        selectedAvatar = avatar.src;
+
+
+    });
+
+});
+
+// =======================================================
+// zzs25: Switch Parent / Child Profiles
+// =======================================================
+
+
+const parentProfileTab =
+document.getElementById("parentProfileTab");
+
+
+const childProfileTab =
+document.getElementById("childProfileTab");
+
+
+const avatarTitle =
+document.getElementById("avatarTitle");
+
+// =======================================================
+// zzs25: Profile Switching Functions
+// =======================================================
+
+function switchToParent() {
+
+    currentProfile = "parent";
+
+    selectedAvatar = parentAvatar;
+
+    avatarTitle.textContent = "Select Parent Avatar";
+
+    parentProfileTab.classList.add("active");
+
+    childProfileTab.classList.remove("active");
+
+    // Highlight selected avatar
+
+    avatarChoices.forEach(choice => {
+
+        choice.classList.remove("selected");
+
+        if (choice.src === selectedAvatar) {
+
+            choice.classList.add("selected");
+
+        }
+
+    });
+
+}
+
+function switchToChild() {
+
+    currentProfile = "child";
+
+    selectedAvatar = childAvatar;
+
+    avatarTitle.textContent = "Select Child Avatar";
+
+    childProfileTab.classList.add("active");
+
+    parentProfileTab.classList.remove("active");
+
+    // Highlight selected avatar
+
+    avatarChoices.forEach(choice => {
+
+        choice.classList.remove("selected");
+
+        if (choice.src === selectedAvatar) {
+
+            choice.classList.add("selected");
+
+        }
+
+    });
+
+}
+
+
+parentProfileTab.addEventListener("click", () => {
+
+    switchToParent();
+
+});
+
+
+
+childProfileTab.addEventListener("click", () => {
+
+    switchToChild();
+
+});
+
+
+// Save avatar
+
+saveAvatarButton.addEventListener('click', () => {
+
+
+    // zzs25: Save avatar choice in browser storage
+
+if(currentProfile === "parent"){
+
+    parentAvatar = selectedAvatar;
+
+    localStorage.setItem(
+        "parentAvatar",
+        parentAvatar
+    );
+
+}
+else{
+
+    childAvatar = selectedAvatar;
+
+    localStorage.setItem(
+        "childAvatar",
+        childAvatar
+    );
+
+}
+
+    // Update the correct header avatar
+
+    if(currentProfile === "parent"){
+
+        profileAvatar.src = parentAvatar;
+
+    }
+    else{
+
+        childProfileAvatar.src = childAvatar;
+
+    }
+
+// Close popup
+
+profilePopup.classList.remove('show');
+
+
+});
+
+// =======================================================
+// zzs25: Load saved avatars when page opens
+// =======================================================
+
+profileAvatar.src = parentAvatar;
+
+const childProfileAvatar =
+document.getElementById("childProfileAvatar");
+
+childProfileAvatar.src = childAvatar;
+</script>
 </body>
 </html>
