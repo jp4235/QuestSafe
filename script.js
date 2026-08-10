@@ -1,4 +1,3 @@
-// zzs25: Kid/Parent selection disappears.Parent is automatically selected. The parent sign-up form is displayed.
 const tabButtons = document.querySelectorAll('.tab-btn');
 const roleButtons = document.querySelectorAll('.role-btn');
 const roleToggleSignin = document.getElementById('role-toggle-signin');
@@ -77,9 +76,11 @@ document.getElementById('panel-signin-kid').addEventListener('submit', (e) => {
   if (!/^\d{4}$/.test(code.value.trim())) { showError(code, 'Enter the 4-digit code from your parent.'); valid = false; }
   if (!valid) return;
 
-  
+  // TODO: replace with a real API call, e.g.
+  // fetch('/api/auth/kid-signin', { method: 'POST', body: JSON.stringify({ username: username.value, code: code.value }) })
+  //   .then(...) then redirect only if the server confirms the login succeeded
   console.log('Kid sign in:', { username: username.value, code: code.value });
-  window.location.href = 'Communities.html';
+  window.location.href = 'communities.html';
 });
 
 document.getElementById('panel-signin-parent').addEventListener('submit', (e) => {
@@ -91,11 +92,18 @@ document.getElementById('panel-signin-parent').addEventListener('submit', (e) =>
 
   let valid = true;
   if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) { showError(email, 'Enter a valid email address.'); valid = false; }
-  if (!password.value) { showError(password, 'Enter your password.'); valid = false; }
+  if (!password.value) {
+    showError(password, 'Enter your password.');
+    valid = false;
+  } else if (password.value.length < 8) {
+    showError(password, 'Password must be at least 8 characters.');
+    valid = false;
+  }
   if (!valid) return;
 
+  // TODO: replace with a real API call, redirecting only once the server confirms success
   console.log('Parent sign in:', { email: email.value });
-  window.location.href = 'Home.html';
+  window.location.href = 'home.html';
 });
 
 document.getElementById('panel-signup-parent').addEventListener('submit', (e) => {
@@ -110,8 +118,9 @@ document.getElementById('panel-signup-parent').addEventListener('submit', (e) =>
   if (password.value.length < 8) { showError(password, 'Password must be at least 8 characters.'); valid = false; }
   if (!valid) return;
 
+  // TODO: replace with a real API call that also returns the generated parent code
   console.log('Parent sign up:', { email: email.value });
-  window.location.href = 'Home.html';
+  window.location.href = 'home.html';
 });
 
 render();
