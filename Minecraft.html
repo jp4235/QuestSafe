@@ -114,8 +114,13 @@
       </div>
 
       <div class="block-row">
-        <input type="checkbox" id="blockUserCheckbox">
-        <label for="blockUserCheckbox">Block User</label>
+        <input type="radio" name="moderationAction" id="blockUserOption" value="block">
+        <label for="blockUserOption" id="blockUserLabel">Block User</label>
+      </div>
+
+      <div class="block-row">
+        <input type="radio" name="moderationAction" id="muteUserOption" value="mute">
+        <label for="muteUserOption" id="muteUserLabel">Mute User</label>
       </div>
 
       <div class="report-actions">
@@ -269,6 +274,10 @@ const closeReportPopup = document.getElementById('closeReportPopup');
 const cancelReport = document.getElementById('cancelReport');
 const submitReport = document.getElementById('submitReport');
 const reportUsernameInput = document.getElementById('reportUsernameInput');
+const blockUserOption = document.getElementById('blockUserOption');
+const blockUserLabel = document.getElementById('blockUserLabel');
+const muteUserOption = document.getElementById('muteUserOption');
+const muteUserLabel = document.getElementById('muteUserLabel');
 
 // zzs25: Small inline validation helpers (mirrors script.js's showError/clearError pattern)
 function showFieldError(fieldEl, message) {
@@ -299,12 +308,36 @@ function openReportPopup(username) {
         reportUsernameInput.readOnly = false;
     }
 
+    updateModerationControls();
     reportPopup.classList.add('show');
 
     if (!username) {
         reportUsernameInput.focus();
     }
 }
+
+function updateModerationControls() {
+    const username = reportUsernameInput.value.trim();
+    const isMuted = username && typeof window.questsafeIsMuted === 'function'
+        ? window.questsafeIsMuted(username)
+        : false;
+    const isBlocked = username && typeof window.questsafeIsBlocked === 'function'
+        ? window.questsafeIsBlocked(username)
+        : false;
+
+    blockUserOption.checked = false;
+    muteUserOption.checked = false;
+    blockUserLabel.textContent = isBlocked ? 'Unblock User' : 'Block User';
+    muteUserLabel.textContent = isMuted ? 'Unmute User' : 'Mute User';
+
+    if (isBlocked) {
+        blockUserOption.checked = true;
+    } else if (isMuted) {
+        muteUserOption.checked = true;
+    }
+}
+
+reportUsernameInput.addEventListener('input', updateModerationControls);
 
 reportButton.addEventListener('click', () => {
     openReportPopup();
@@ -338,7 +371,11 @@ submitReport.addEventListener('click', () => {
     // zzs25: Pull the username out of the field (typed or pre-filled) and validate it
     const username = reportUsernameInput.value.trim();
     const reason = document.getElementById('reasonLabel').textContent;
-    const blocked = document.getElementById('blockUserCheckbox').checked;
+    const action = document.querySelector('input[name="moderationAction"]:checked')?.value || '';
+    const isCurrentlyBlocked = typeof window.questsafeIsBlocked === 'function' && window.questsafeIsBlocked(username);
+    const isCurrentlyMuted = typeof window.questsafeIsMuted === 'function' && window.questsafeIsMuted(username);
+    const wantsBlock = action === 'block';
+    const wantsMute = action === 'mute';
 
     if (!username) {
         showFieldError(reportUsernameInput, 'Please enter a username to report.');
@@ -346,7 +383,29 @@ submitReport.addEventListener('click', () => {
     }
     clearFieldError(reportUsernameInput);
 
-    console.log('Report submitted:', { username, reason, blocked });
+    // Block and mute are mutually exclusive parent/admin moderation actions.
+    if (typeof currentProfile !== 'undefined' && currentProfile !== 'parent' && (wantsMute || wantsBlock)) {
+        alert('Only the Parent profile can block or mute a user.');
+        return;
+    }
+
+    if (wantsBlock) {
+        if (isCurrentlyBlocked) {
+            if (typeof window.questsafeUnblockUser === 'function') window.questsafeUnblockUser(username);
+        } else {
+            if (typeof window.questsafeBlockUser === 'function') window.questsafeBlockUser(username);
+            if (isCurrentlyMuted && typeof window.questsafeUnmuteUser === 'function') window.questsafeUnmuteUser(username);
+        }
+    } else if (wantsMute) {
+        if (isCurrentlyMuted) {
+            if (typeof window.questsafeUnmuteUser === 'function') window.questsafeUnmuteUser(username);
+        } else {
+            if (typeof window.questsafeMuteUser === 'function') window.questsafeMuteUser(username);
+            if (isCurrentlyBlocked && typeof window.questsafeUnblockUser === 'function') window.questsafeUnblockUser(username);
+        }
+    }
+
+    console.log('Report submitted:', { username, reason, action });
 
     document.getElementById('reportedUsernameConfirm').textContent = username;
     document.getElementById('reportFormView').classList.add('hidden');
@@ -364,6 +423,10 @@ document.getElementById('closeSuccessBtn').addEventListener('click', () => {
     // zzs25: Reset the username field so the next open starts clean/editable again
     reportUsernameInput.value = '';
     reportUsernameInput.readOnly = false;
+    blockUserOption.checked = false;
+    muteUserOption.checked = false;
+    blockUserLabel.textContent = 'Block User';
+    muteUserLabel.textContent = 'Mute User';
     clearFieldError(reportUsernameInput);
 });
 
