@@ -176,12 +176,14 @@
         The moderator can also decide if you are abusing this feature! Remember, you can also choose to ignore this user.
       </div>
 
-      <!-- zzs25: Username field — replaces the old hardcoded <username> placeholder.
+      <!-- sr3745: Username field — replaces the old hardcoded <username> placeholder.
            Editable when opened from the header Report button, read-only + pre-filled
-           when opened by clicking a member's report icon (see openReportPopup()) -->
+           when opened by clicking a member's report icon (see openReportPopup()).
+           maxlength="8" caps typed input — the full 3-8 range is enforced
+           in validateUsername(). -->
       <div class="field" id="reportUsernameField">
         <label for="reportUsernameInput">Username</label>
-        <input type="text" id="reportUsernameInput" placeholder="Enter a username" autocomplete="off">
+        <input type="text" id="reportUsernameInput" placeholder="Enter a username" autocomplete="off" maxlength="8">
       </div>
 
       <div class="reason-select" id="reasonSelect">
@@ -205,7 +207,7 @@
     <div id="reportSuccessView" class="hidden">
 
       <div class="report-info">
-        You have successfully reported <strong id="reportedUsernameConfirm">&lt;username&gt;</strong>.
+        You have successfully reported and/or blocked <strong id="reportedUsernameConfirm">&lt;username&gt;</strong>.
       </div>
 
       <div class="report-actions">
@@ -292,6 +294,10 @@
 // This page has the top banner (Report, Block, Profile) plus per-member report icons.
 
 document.getElementById('blockButton').addEventListener('click', () => {
+    openReportPopup();
+    const checkbox = document.getElementById('blockUserCheckbox');
+    checkbox.checked = true;
+    checkbox.dispatchEvent(new Event('change'));
 });
 
 // =======================================================
@@ -346,7 +352,6 @@ const cancelReport = document.getElementById('cancelReport');
 const submitReport = document.getElementById('submitReport');
 const reportUsernameInput = document.getElementById('reportUsernameInput');
 
-// zzs25: Small inline validation helpers (mirrors script.js's showError/clearError pattern)
 function showFieldError(fieldEl, message) {
     clearFieldError(fieldEl);
     fieldEl.parentElement.classList.add('error');
@@ -362,7 +367,66 @@ function clearFieldError(fieldEl) {
     if (existing) existing.remove();
 }
 
-// zzs25: Opens the report popup.
+// =======================================================
+// sr3745: Username validation rules
+// =======================================================
+
+// Simulated "database" lookup that mirrors the usernames seeded in gamer_accounts
+// (chammel, jsmith, ljones). 
+const validUsernames = ['chammel', 'jsmith', 'ljones'];
+
+// Users already reported/blocked this session+device, persisted so a refresh
+// doesn't let someone report the same user twice.
+let moderatedUsers = JSON.parse(localStorage.getItem('moderatedUsers') || '[]');
+
+function markUserModerated(username) {
+    const uname = username.toLowerCase();
+    if (!moderatedUsers.includes(uname)) {
+        moderatedUsers.push(uname);
+        localStorage.setItem('moderatedUsers', JSON.stringify(moderatedUsers));
+    }
+}
+
+// Returns an error message string if invalid, or null if the username passes all checks.
+// Order: format -> length (too short) -> length (too long) -> existence -> already moderated
+function validateUsername(rawUsername) {
+    const username = rawUsername.trim();
+
+    if (!username) {
+        return 'Please enter a username to report.';
+    }
+
+    // Rule: first character must be a letter
+    if (!/^[A-Za-z]/.test(username)) {
+        return 'All usernames must start with a letter.';
+    }
+
+    // Rule: must be at least 3 characters
+    if (username.length < 3) {
+        return 'Usernames must be at least 3 letters long.';
+    }
+
+    // Rule: must be no more than 8 characters
+    // (the input has maxlength="8" so this mainly guards usernames passed in
+    // programmatically via openReportPopup(username), not typed input)
+    if (username.length > 8) {
+        return 'Usernames must be no more than 8 letters long.';
+    }
+
+    // Rule: must exist in the system
+    if (!validUsernames.includes(username.toLowerCase())) {
+        return 'This username does not exist.';
+    }
+
+    // Rule: can't report/block the same user twice
+    if (moderatedUsers.includes(username.toLowerCase())) {
+        return 'You have already reported and/or blocked this user.';
+    }
+
+    return null;
+}
+
+// sr3745: Opens the report popup.
 // - Call with no args (top-bar Report button) to let the user type a username.
 // - Call with a username (clicking a user's report icon) to pre-fill it and lock it.
 function openReportPopup(username) {
@@ -410,19 +474,37 @@ document.getElementById('reasonSelect').addEventListener('click', () => {
     document.getElementById('reasonLabel').textContent = reasons[reasonIndex];
 });
 
+// sr3745: Validate as soon as the user hits Enter in the username field,
+reportUsernameInput.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+
+    const error = validateUsername(reportUsernameInput.value);
+    if (error) {
+        showFieldError(reportUsernameInput, error);
+    } else {
+        clearFieldError(reportUsernameInput);
+    }
+});
+
 submitReport.addEventListener('click', () => {
-    // zzs25: Pull the username out of the field (typed or pre-filled) and validate it
-    const username = reportUsernameInput.value.trim();
+    const rawUsername = reportUsernameInput.value;
     const reason = document.getElementById('reasonLabel').textContent;
     const blocked = document.getElementById('blockUserCheckbox').checked;
 
-    if (!username) {
-        showFieldError(reportUsernameInput, 'Please enter a username to report.');
+    const error = validateUsername(rawUsername);
+    if (error) {
+        showFieldError(reportUsernameInput, error);
         return;
     }
     clearFieldError(reportUsernameInput);
 
+    const username = rawUsername.trim();
+
     console.log('Report submitted:', { username, reason, blocked });
+
+    // Remember this user so a repeat report/block is caught next time
+    markUserModerated(username);
 
     document.getElementById('reportedUsernameConfirm').textContent = username;
     document.getElementById('reportFormView').classList.add('hidden');
@@ -437,7 +519,7 @@ document.getElementById('closeSuccessBtn').addEventListener('click', () => {
     document.getElementById('reportSuccessView').classList.add('hidden');
     document.getElementById('reportFormView').classList.remove('hidden');
 
-    // zzs25: Reset the username field so the next open starts clean/editable again
+    // sr3745: Reset the username field so the next open starts clean/editable again
     reportUsernameInput.value = '';
     reportUsernameInput.readOnly = false;
     clearFieldError(reportUsernameInput);
@@ -516,6 +598,7 @@ document.getElementById("childProfileTab");
 
 const avatarTitle =
 document.getElementById("avatarTitle");
+
 
 // =======================================================
 // jp4235: Profile Switching Functions
