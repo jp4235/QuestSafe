@@ -1,3 +1,5 @@
+//zzs25
+
 const tabButtons = document.querySelectorAll('.tab-btn');
 const roleButtons = document.querySelectorAll('.role-btn');
 const roleToggleSignin = document.getElementById('role-toggle-signin');
@@ -47,7 +49,7 @@ roleButtons.forEach(btn => {
   });
 });
 
-// --- Simple front-end validation stubs (wire these to your backend calls) ---
+// --- Simple front-end validation stubs --- //
 
 function showError(fieldEl, message) {
   clearError(fieldEl);
@@ -76,9 +78,7 @@ document.getElementById('panel-signin-kid').addEventListener('submit', (e) => {
   if (!/^\d{4}$/.test(code.value.trim())) { showError(code, 'Enter the 4-digit code from your parent.'); valid = false; }
   if (!valid) return;
 
-  // TODO: replace with a real API call, e.g.
-  // fetch('/api/auth/kid-signin', { method: 'POST', body: JSON.stringify({ username: username.value, code: code.value }) })
-  //   .then(...) then redirect only if the server confirms the login succeeded
+  
   console.log('Kid sign in:', { username: username.value, code: code.value });
   window.location.href = 'communities.html';
 });
@@ -118,7 +118,6 @@ document.getElementById('panel-signup-parent').addEventListener('submit', (e) =>
   if (password.value.length < 8) { showError(password, 'Password must be at least 8 characters.'); valid = false; }
   if (!valid) return;
 
-  // TODO: replace with a real API call that also returns the generated parent code
   console.log('Parent sign up:', { email: email.value });
   window.location.href = 'home.html';
 });

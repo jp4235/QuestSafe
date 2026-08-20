@@ -8,28 +8,23 @@
 </head>
 <body class="home-body">
 
-
-
-
-
-
 <div class="header">
+  <h1 class="logo"> QuestSafe </h1>
   <div class="header-actions">
     <button class="icon-button" id="reportButton" title="Report">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V4s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V4"/></svg>
       <span>Report</span>
     </button>
 
-  <!-- ch3436 Add go back to Home page by clicking QuestSafe text in header-->
-   <a href ="Home.html" class="logoLink">
-    <h1 class="logo">QuestSafe</h1>
-   </a>
-
     <button class="icon-button" id="blockButton" title="Block">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
       <span>Block</span>
     </button>
 
+    <button class="icon-button" id="logoutButton" title="Log out">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      <span>Log out</span>
+    </button>
 
       <!-- jp4235: Parent profile avatar -->
       <div class="avatar-group">
@@ -436,6 +431,9 @@ document.getElementById('blockButton').addEventListener('click', () => {
     checkbox.dispatchEvent(new Event('change'));
 });
 
+document.getElementById('logoutButton').addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
 
 // =======================================================
 // jp4235: Profile Popup
