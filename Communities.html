@@ -10,21 +10,30 @@
 
 
 
+
+
+
 <div class="header">
-  <h1 class="logo"> QuestSafe </h1>
   <div class="header-actions">
     <button class="icon-button" id="reportButton" title="Report">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V4s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V4"/></svg>
       <span>Report</span>
     </button>
 
+  <!-- ch3436 Add go back to Home page by clicking QuestSafe text in header-->
+   <a href ="Home.html" class="logoLink">
+    <h1 class="logo">QuestSafe</h1>
+   </a>
+
     <button class="icon-button" id="blockButton" title="Block">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/></svg>
       <span>Block</span>
     </button>
 
+
       <!-- jp4235: Parent profile avatar -->
       <div class="avatar-group">
+
 
           <div class="avatar" id="profileButton">
              <img
@@ -33,13 +42,18 @@
                 alt="Parent Avatar">
         </div>
 
+
         <span class="avatar-label">Parent</span>
+
 
     </div>
 
 
+
+
     <!-- jp4235: Child profile avatar -->
     <div class="avatar-group">
+
 
         <div class="avatar" id="childProfileButton">
              <img
@@ -48,16 +62,21 @@
                 alt="Child Avatar">
         </div>
 
+
         <span class="avatar-label">Child</span>
+
 
     </div>
   </div>
 </div>
 
+<!-- ch3436: Communities Section-->
+
 <div class="communities-section">
   <div class="section-header">
     <h2>Communities</h2>
   </div>
+
 
   <div class="community-list">
     <!-- Minecraft -->
@@ -74,13 +93,15 @@
       <div class="community-action">
         <button class="message-btn"
         onclick="window.location.href='Minecraft.html';">
-          
+         
           Message
+
 
         </button>
         <button class="more-btn">...</button>
       </div>
     </div>
+
 
     <!-- Roblox -->
     <div class="community-card">
@@ -98,13 +119,15 @@
       <div class="community-action">
         <button class="message-btn"
         onclick="window.location.href='Roblox.html';">
-          
+         
           Message
+
 
         </button>
         <button class="more-btn">...</button>
       </div>
     </div>
+
 
     <!-- Pokemon -->
     <div class="community-card">
@@ -120,13 +143,15 @@
       <div class="community-action">
        <button class="message-btn"
         onclick="window.location.href='Pokemon.html';">
-          
+         
           Message
+
 
         </button>
         <button class="more-btn">...</button>
       </div>
     </div>
+
 
     <!-- Valorant -->
     <div class="community-card">
@@ -137,44 +162,116 @@
           <span class="member-count">👥 666 Members</span>
           <span>💬 18 new messages</span>
           <span class="status">Online</span>                
-        </div> 
+        </div>
       <div class="community-action">
 <button class="message-btn"
         onclick="window.location.href='Valorant.html';">
-          
+         
           Message
+
 
         </button>        <button class="more-btn">...</button>
       </div>
     </div>
   </div>
-  
+ 
+
 
   <div class="divider-text">
     <span>Join a new gaming community!</span>
-    <button class="join-btn">+ Add new</button>
+    <button class="join-btn" id="addCommunityButton">+ Add new</button>
   </div>
 </div>
+
+<!-- Add community popup-->
+ <div id="communityPopup" class="popup-overlay">
+  <div class="popup-content">
+    <div class="popup-header">
+      <h2>Add new community</h2>
+      <button
+      id="closeCommunityPopup"
+      class="close-button"
+      type="button">
+      X
+    </button>
+
+    </div>
+
+    <hr>
+    <p>Search for a gaming community.</p>
+    <input
+    type="text"
+    id="communitySearchInput"
+    placeholder="Enter community..."
+    autocomplete="off">
+
+    <button
+    id="searchCommunityButton"
+    class="primary-btn"
+    type="button">
+    Search
+  </button>
+  </div>
+ </div>
+
+<div id="noResultsPopup" class="popup-overlay">
+  <div class="popup-content no-results-content">
+
+
+    <div class="popup-header">
+      <h2>No Results</h2>
+
+
+      <button
+        id="closeNoResultsPopup"
+        class="close-button"
+        type="button">
+      X
+    </button>
+    </div>
+    <hr>
+    <p>
+      No community found.
+    </p>
+    <button
+    id="tryAgainButton"
+        class="primary-btn"
+        type="button">
+        Input a valid community.
+        </button>
+        </div>
+</div>
+
+
+
+
+
 
 <!-- jp4235: Report User Popup -->
 <div id="reportPopup" class="popup-overlay">
 
+
   <div class="popup-content">
+
 
     <div class="popup-header">
       <h2>Report a User</h2>
       <button id="closeReportPopup" class="close-button">✕</button>
     </div>
 
+
     <hr>
+
 
     <!-- Form view: shown first -->
     <div id="reportFormView">
+
 
       <div class="report-info">
         Enter a username and choose a reason, then click Report to send it to a moderator for review.
         The moderator can also decide if you are abusing this feature! Remember, you can also choose to ignore this user.
       </div>
+
 
       <!-- sr3745: Username field — replaces the old hardcoded <username> placeholder.
            Editable when opened from the header Report button, read-only + pre-filled
@@ -186,54 +283,70 @@
         <input type="text" id="reportUsernameInput" placeholder="Enter a username" autocomplete="off" maxlength="8">
       </div>
 
+
       <div class="reason-select" id="reasonSelect">
         <span class="reason-icon">+</span>
         <span id="reasonLabel">Inappropriate Language!</span>
       </div>
+
 
       <div class="block-row">
         <input type="checkbox" id="blockUserCheckbox">
         <label for="blockUserCheckbox">Block User</label>
       </div>
 
+
       <div class="report-actions">
         <button id="cancelReport" class="cancel-btn">CANCEL ✕</button>
         <button id="submitReport" class="report-btn">REPORT ✓</button>
       </div>
 
+
     </div>
+
 
     <!-- Success view: hidden until Report is clicked -->
     <div id="reportSuccessView" class="hidden">
+
 
       <div class="report-info">
         You have successfully reported and/or blocked <strong id="reportedUsernameConfirm">&lt;username&gt;</strong>.
       </div>
 
+
       <div class="report-actions">
         <button id="closeSuccessBtn" class="report-btn full-width">CLOSE ✓</button>
       </div>
 
+
     </div>
+
 
   </div>
 
+
 </div>
+
 
 <!-- jp4235: Parent Profile Popup -->
 <div id="profilePopup" class="popup-overlay">
 
+
   <div class="popup-content">
+
 
     <div class="popup-header">
       <h2>Parent Profile</h2>
+
 
       <button id="closePopup" class="close-button">
         ✕
       </button>
     </div>
 
+
     <hr>
+
 
     <p>
 <!-- =======================================
@@ -241,22 +354,30 @@
 ======================================= -->
 
 
+
+
 <div class="profile-tabs">
 
-          <button 
-              id="parentProfileTab" 
+
+          <button
+              id="parentProfileTab"
               class="profile-tab active">
               Parent
           </button>
 
 
-          <button 
-              id="childProfileTab" 
+
+
+          <button
+              id="childProfileTab"
               class="profile-tab">
               Child
           </button>
 
+
       </div>
+
+
 
 
       <h3 id="avatarTitle">
@@ -264,21 +385,32 @@
       </h3>
 
 
+
+
       <div class="avatar-grid">
+
 
         <img src="avatars/avatar1.png" class="avatar-choice selected">
 
+
          <img src="avatars/avatar2.png" class="avatar-choice">
+
 
          <img src="avatars/avatar3.png" class="avatar-choice">
 
+
          <img src="avatars/avatar4.png" class="avatar-choice">
+
 
          <img src="avatars/avatar5.png" class="avatar-choice">
 
+
          <img src="avatars/avatar6.png" class="avatar-choice">
 
+
       </div>
+
+
 
 
       <button id="saveAvatar" class="primary-btn">
@@ -286,12 +418,16 @@
       </button>
     </p>
 
+
   </div>
+
 
 </div>
 
+
 <script>
 // This page has the top banner (Report, Block, Profile) plus per-member report icons.
+
 
 document.getElementById('blockButton').addEventListener('click', () => {
     openReportPopup();
@@ -300,50 +436,70 @@ document.getElementById('blockButton').addEventListener('click', () => {
     checkbox.dispatchEvent(new Event('change'));
 });
 
+
 // =======================================================
 // jp4235: Profile Popup
 // =======================================================
 
+
 const profilePopup = document.getElementById('profilePopup');
+
 
 const profileButton = document.getElementById('profileButton');
 
+
 // jp4235: Child profile button
+
 
 const childProfileButton =
 document.getElementById("childProfileButton");
 
+
 const closePopup = document.getElementById('closePopup');
+
 
 profileButton.addEventListener('click', () => {
 
+
     profilePopup.classList.add('show');
+
 
     switchToParent();
 
+
 });
+
 
 // =======================================================
 // jp4235: Open popup for Child
 // =======================================================
 
+
 childProfileButton.addEventListener('click', () => {
+
 
     profilePopup.classList.add('show');
 
+
     switchToChild();
 
+
 });
+
 
 closePopup.addEventListener('click', () => {
 
+
     profilePopup.classList.remove('show');
 
+
 });
+
 
 // =======================================================
 // sr3745: Report Popup
 // =======================================================
+
 
 const reportPopup = document.getElementById('reportPopup');
 const reportButton = document.getElementById('reportButton');
@@ -351,6 +507,7 @@ const closeReportPopup = document.getElementById('closeReportPopup');
 const cancelReport = document.getElementById('cancelReport');
 const submitReport = document.getElementById('submitReport');
 const reportUsernameInput = document.getElementById('reportUsernameInput');
+
 
 function showFieldError(fieldEl, message) {
     clearFieldError(fieldEl);
@@ -361,23 +518,28 @@ function showFieldError(fieldEl, message) {
     fieldEl.parentElement.appendChild(err);
 }
 
+
 function clearFieldError(fieldEl) {
     fieldEl.parentElement.classList.remove('error');
     const existing = fieldEl.parentElement.querySelector('.field-error');
     if (existing) existing.remove();
 }
 
+
 // =======================================================
 // sr3745: Username validation rules
 // =======================================================
 
+
 // Simulated "database" lookup that mirrors the usernames seeded in gamer_accounts
-// (chammel, jsmith, ljones). 
+// (chammel, jsmith, ljones).
 const validUsernames = ['chammel', 'jsmith', 'ljones'];
+
 
 // Users already reported/blocked this session+device, persisted so a refresh
 // doesn't let someone report the same user twice.
 let moderatedUsers = JSON.parse(localStorage.getItem('moderatedUsers') || '[]');
+
 
 function markUserModerated(username) {
     const uname = username.toLowerCase();
@@ -387,24 +549,29 @@ function markUserModerated(username) {
     }
 }
 
+
 // Returns an error message string if invalid, or null if the username passes all checks.
 // Order: format -> length (too short) -> length (too long) -> existence -> already moderated
 function validateUsername(rawUsername) {
     const username = rawUsername.trim();
 
+
     if (!username) {
         return 'Please enter a username to report.';
     }
+
 
     // Rule: first character must be a letter
     if (!/^[A-Za-z]/.test(username)) {
         return 'All usernames must start with a letter.';
     }
 
+
     // Rule: must be at least 3 characters
     if (username.length < 3) {
         return 'Usernames must be at least 3 letters long.';
     }
+
 
     // Rule: must be no more than 8 characters
     // (the input has maxlength="8" so this mainly guards usernames passed in
@@ -413,18 +580,22 @@ function validateUsername(rawUsername) {
         return 'Usernames must be no more than 8 letters long.';
     }
 
+
     // Rule: must exist in the system
     if (!validUsernames.includes(username.toLowerCase())) {
         return 'This username does not exist.';
     }
+
 
     // Rule: can't report/block the same user twice
     if (moderatedUsers.includes(username.toLowerCase())) {
         return 'You have already reported and/or blocked this user.';
     }
 
+
     return null;
 }
+
 
 // sr3745: Opens the report popup.
 // - Call with no args (top-bar Report button) to let the user type a username.
@@ -439,16 +610,20 @@ function openReportPopup(username) {
         reportUsernameInput.readOnly = false;
     }
 
+
     reportPopup.classList.add('show');
+
 
     if (!username) {
         reportUsernameInput.focus();
     }
 }
 
+
 reportButton.addEventListener('click', () => {
     openReportPopup();
 });
+
 
 // zzs25: Report icon on each community member — reports that user directly
 document.querySelectorAll('.report-user-trigger').forEach((btn) => {
@@ -458,13 +633,16 @@ document.querySelectorAll('.report-user-trigger').forEach((btn) => {
     });
 });
 
+
 closeReportPopup.addEventListener('click', () => {
     reportPopup.classList.remove('show');
 });
 
+
 cancelReport.addEventListener('click', () => {
     reportPopup.classList.remove('show');
 });
+
 
 // Cycle through reasons on click — swap for a real dropdown later
 const reasons = ['Inappropriate Language!', 'Harassment', 'Spam', 'Impersonation'];
@@ -474,10 +652,12 @@ document.getElementById('reasonSelect').addEventListener('click', () => {
     document.getElementById('reasonLabel').textContent = reasons[reasonIndex];
 });
 
+
 // sr3745: Validate as soon as the user hits Enter in the username field,
 reportUsernameInput.addEventListener('keydown', (e) => {
     if (e.key !== 'Enter') return;
     e.preventDefault();
+
 
     const error = validateUsername(reportUsernameInput.value);
     if (error) {
@@ -487,10 +667,12 @@ reportUsernameInput.addEventListener('keydown', (e) => {
     }
 });
 
+
 submitReport.addEventListener('click', () => {
     const rawUsername = reportUsernameInput.value;
     const reason = document.getElementById('reasonLabel').textContent;
     const blocked = document.getElementById('blockUserCheckbox').checked;
+
 
     const error = validateUsername(rawUsername);
     if (error) {
@@ -499,25 +681,32 @@ submitReport.addEventListener('click', () => {
     }
     clearFieldError(reportUsernameInput);
 
+
     const username = rawUsername.trim();
+
 
     console.log('Report submitted:', { username, reason, blocked });
 
+
     // Remember this user so a repeat report/block is caught next time
     markUserModerated(username);
+
 
     document.getElementById('reportedUsernameConfirm').textContent = username;
     document.getElementById('reportFormView').classList.add('hidden');
     document.getElementById('reportSuccessView').classList.remove('hidden');
 });
 
+
 // Close after seeing the success message
 document.getElementById('closeSuccessBtn').addEventListener('click', () => {
     reportPopup.classList.remove('show');
 
+
     // Reset back to the form view for next time the popup opens
     document.getElementById('reportSuccessView').classList.add('hidden');
     document.getElementById('reportFormView').classList.remove('hidden');
+
 
     // sr3745: Reset the username field so the next open starts clean/editable again
     reportUsernameInput.value = '';
@@ -525,24 +714,34 @@ document.getElementById('closeSuccessBtn').addEventListener('click', () => {
     clearFieldError(reportUsernameInput);
 });
 
+
 // =======================================================
-// zzs25 : Avatar Selection + Saving 
+// zzs25 : Avatar Selection + Saving
 // =======================================================
+
 
 const avatarChoices = document.querySelectorAll('.avatar-choice');
 
+
 const profileAvatar = document.getElementById('profileAvatar');
+
 
 const saveAvatarButton = document.getElementById('saveAvatar');
 
+
 // zzs25: Store separate avatars
+
 
 let currentProfile = "parent";
 
 
-let selectedAvatar = 
+
+
+let selectedAvatar =
     localStorage.getItem("parentAvatar")
     || "avatars/avatar1.png";
+
+
 
 
 let parentAvatar =
@@ -550,189 +749,418 @@ let parentAvatar =
     || "avatars/avatar1.png";
 
 
+
+
 let childAvatar =
     localStorage.getItem("childAvatar")
     || "avatars/avatar2.png";
 
+
 // Select avatar
 avatarChoices.forEach(avatar => {
+
 
     avatar.addEventListener('click', () => {
 
 
+
+
         // Remove previous selection
+
 
         avatarChoices.forEach(choice => {
 
+
             choice.classList.remove('selected');
+
 
         });
 
 
+
+
         // Highlight chosen avatar
+
 
         avatar.classList.add('selected');
 
 
+
+
         // Store chosen image path
+
 
         selectedAvatar = avatar.src;
 
 
+
+
     });
 
+
 });
+
 
 // =======================================================
 // zzs25: Switch Parent / Child Profiles
 // =======================================================
 
 
+
+
 const parentProfileTab =
 document.getElementById("parentProfileTab");
+
+
 
 
 const childProfileTab =
 document.getElementById("childProfileTab");
 
 
+
+
 const avatarTitle =
 document.getElementById("avatarTitle");
+
+
 
 
 // =======================================================
 // jp4235: Profile Switching Functions
 // =======================================================
 
+
 function switchToParent() {
+
 
     currentProfile = "parent";
 
+
     selectedAvatar = parentAvatar;
+
 
     avatarTitle.textContent = "Select Parent Avatar";
 
+
     parentProfileTab.classList.add("active");
+
 
     childProfileTab.classList.remove("active");
 
+
     // Highlight selected avatar
+
 
     avatarChoices.forEach(choice => {
 
+
         choice.classList.remove("selected");
+
 
         if (choice.src === selectedAvatar) {
 
+
             choice.classList.add("selected");
+
 
         }
 
+
     });
 
+
 }
+
 
 function switchToChild() {
 
+
     currentProfile = "child";
+
 
     selectedAvatar = childAvatar;
 
+
     avatarTitle.textContent = "Select Child Avatar";
+
 
     childProfileTab.classList.add("active");
 
+
     parentProfileTab.classList.remove("active");
+
 
     // Highlight selected avatar
 
+
     avatarChoices.forEach(choice => {
+
 
         choice.classList.remove("selected");
 
+
         if (choice.src === selectedAvatar) {
+
 
             choice.classList.add("selected");
 
+
         }
+
 
     });
 
+
 }
+
+
 
 
 parentProfileTab.addEventListener("click", () => {
 
+
     switchToParent();
 
+
 });
+
+
+
 
 
 
 childProfileTab.addEventListener("click", () => {
 
+
     switchToChild();
+
 
 });
 
 
+
+
 // Save avatar
+
 
 saveAvatarButton.addEventListener('click', () => {
 
 
 
+
+
+
 if(currentProfile === "parent"){
 
+
     parentAvatar = selectedAvatar;
+
 
     localStorage.setItem(
         "parentAvatar",
         parentAvatar
     );
 
+
 }
 else{
 
+
     childAvatar = selectedAvatar;
+
 
     localStorage.setItem(
         "childAvatar",
         childAvatar
     );
 
+
 }
+
 
     // Update the correct header avatar
 
+
     if(currentProfile === "parent"){
 
+
         profileAvatar.src = parentAvatar;
+
 
     }
     else{
 
+
         childProfileAvatar.src = childAvatar;
+
 
     }
 
+
 // Close popup
+
 
 profilePopup.classList.remove('show');
 
 
+
+
 });
+
 
 // =======================================================
 // zzs25: Load saved avatars when page opens
 // =======================================================
 
+
 profileAvatar.src = parentAvatar;
+
 
 const childProfileAvatar =
 document.getElementById("childProfileAvatar");
 
+
 childProfileAvatar.src = childAvatar;
+
+
+// ======================================================= 
+// COMMUNITIES POP UP SECTION
+// ======================================================= 
+
+
+// Add New Communities Pop-Up
+
+const addCommunityButton=
+  document.getElementById("addCommunityButton");
+
+const communityPopup=
+  document.getElementById("communityPopup");
+
+const closeCommunityPopup=
+  document.getElementById("closeCommunityPopup");
+
+const communitySearchInput=
+  document.getElementById("communitySearchInput");
+
+const searchCommunityButton=
+  document.getElementById("searchCommunityButton");
+
+const noResultsPopup=
+  document.getElementById("noResultsPopup");
+
+const closeNoResultsPopup=
+  document.getElementById("closeNoResultsPopup");
+
+const tryAgainButton=
+  document.getElementById("tryAgainButton");
+
+
+  // What community inputs would be valid
+const availableCommunities= {
+  valorant: "Valorant.html",
+  minecraft: "Minecraft.html",
+  roblox: "Roblox.html",
+  pokemon: "Pokemon.html"
+};
+
+// Opens popup
+addCommunityButton.addEventListener("click", () => {
+
+  communitySearchInput.value = "";
+  communityPopup.classList.add("show");
+  communitySearchInput.focus();
+
+});
+
+// Close popup
+closeCommunityPopup.addEventListener("click", () => {
+  communityPopup.classList.remove("show");
+
+});
+
+// Search function
+function searchForCommunity() {
+  const searchValue=
+  communitySearchInput.value
+  .trim()
+  .toLowerCase();
+
+  if (availableCommunities[searchValue]) {
+
+    window.location.href =
+    availableCommunities[searchValue];
+
+  }
+  else {
+    communityPopup.classList.remove("show");
+    noResultsPopup.classList.add("show");
+  }
+}
+
+// Search button
+
+searchCommunityButton.addEventListener(
+  "click",
+  searchForCommunity
+);
+
+//Press enter to search
+communitySearchInput.addEventListener(
+  "keydown",
+  (event) => {
+    if(event.key == "Enter") {
+      event.preventDefault();
+      searchForCommunity();
+    }
+  }
+);
+
+//Close no results pop up
+
+closeNoResultsPopup.addEventListener(
+  "click",
+  () => {
+    noResultsPopup.classList.remove("show");
+
+  }
+);
+
+// Input again
+tryAgainButton.addEventListener(
+  "click",
+  () => {
+    noResultsPopup.classList.remove("show");
+    communityPopup.classList.add("show");
+    communitySearchInput.value="";
+    communitySearchInput.focus();
+  }
+);
+
+// Clicking outside of popup closes popup
+communityPopup.addEventListener(
+  "click",
+  (event) => {
+    if (event.target == communityPopup) {
+
+      communityPopup.classList.remove("show");
+
+    }
+  }
+);
+
+// Clicking outside no results popup closes it
+noResultsPopup.addEventListener(
+  "click",
+  (event) => {
+    if(event.target == noResultsPopup) {
+      noResultsPopup.classList.remove("show");
+
+    }
+  }
+);
+
 </script>
 </body>
 </html>
+
