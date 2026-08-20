@@ -14,7 +14,7 @@ last_name  varchar(20) not null,
 
 username varchar (40) not null unique,
 
-password varchar(8) not null,
+password_hash varchar(255) not null,
 
 birth_date  Date,
 
@@ -71,9 +71,9 @@ foreign key (account_id) references gamer_accounts(account_id)
 );
 
 
-insert into gamer_accounts values(001,'Chris','Hammel','chammel','password','2015-08-09','Male');
-insert into gamer_accounts values(002,'Josh','Smith','jsmith','password','2018-07-10','Male');
-insert into gamer_accounts values (003,'Lisa','Jones','ljones','password','2014-06-10','Female');
+insert into gamer_accounts values(001,'Chris','Hammel','chammel',SHA2('password',256),'2015-08-09','Male');
+insert into gamer_accounts values(002,'Josh','Smith','jsmith',SHA2('password',256),'2018-07-10','Male');
+insert into gamer_accounts values (003,'Lisa','Jones','ljones',SHA2('password',256),'2014-06-10','Female');
 
 
 insert into table_games values ('ABC123','Mine Craft',35.00);
